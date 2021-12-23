@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Card from '../ui/Card.js';
 import classes from './NewMeetupForm.module.css';
 
-export default function NewMeetupForm() {
+export default function NewMeetupForm({ onAddMeetup }) {
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const addressInputRef = useRef();
@@ -10,18 +10,15 @@ export default function NewMeetupForm() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const title = titleInputRef.current.value;
-    const image = imageInputRef.current.value;
-    const address = addressInputRef.current.value;
-    const description = descriptionInputRef.current.value;
     const meetupData = {
-      title,
-      image,
-      address,
-      description,
+      title: titleInputRef.current.value,
+      image: imageInputRef.current.value,
+      address: addressInputRef.current.value,
+      description: descriptionInputRef.current.value,
     };
-    console.log(meetupData);
+    onAddMeetup(meetupData);
   };
+
   return (
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
