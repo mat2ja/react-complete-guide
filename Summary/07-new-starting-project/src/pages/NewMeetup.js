@@ -8,14 +8,15 @@ export default function NewMeetupPage() {
     const url =
       'https://react-getting-started-9a50b-default-rtdb.europe-west1.firebasedatabase.app';
     try {
-      console.log('hey');
-      await fetch(`${url}/meetups.json`, {
+      const res = await fetch(`${url}/meetups.json`, {
         method: 'POST',
         body: JSON.stringify(meetupData),
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      }).then((data) => data.json());
+
+      console.log('added meetup:', res);
       history.replace('/');
     } catch (err) {
       console.error(err);
