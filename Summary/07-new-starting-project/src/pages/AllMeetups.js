@@ -36,8 +36,8 @@ export default function AllMeetupsPage() {
 
   return (
     <section>
-      <button onClick={fetchMeetings}>Refresh</button>
       <h1>All Meetups</h1>
+      <button onClick={fetchMeetings}>Refresh</button>
       <MeetupList meetups={loadedMeetups} />
     </section>
   );
