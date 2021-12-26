@@ -1,4 +1,5 @@
 import ExpenseItem from './ExpenseItem.js';
+import Card from './Card.js';
 import './Expenses.css';
 
 export default function Expenses({ items }) {
@@ -6,5 +7,5 @@ export default function Expenses({ items }) {
     <ExpenseItem expense={expense} key={expense.id} />
   ));
 
-  return <div className="items">{expenseItems}</div>;
+  return <Card className="expenses">{expenseItems}</Card>;
 }

@@ -21,6 +21,12 @@ function App() {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
+    {
+      id: 'e5',
+      title: 'Cryptoag Zeus',
+      amount: 2756,
+      date: new Date(2021, 11, 26),
+    },
   ];
   return (
     <div>
