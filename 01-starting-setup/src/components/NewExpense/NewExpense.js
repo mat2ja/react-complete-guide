@@ -1,10 +1,20 @@
+import { nanoid } from 'nanoid';
+
 import ExpenseForm from './ExpenseForm.js';
 import './NewExpense.css';
 
-const NewExpense = () => {
+const NewExpense = ({ onAddExpense }) => {
+  const saveExpenseDataHandler = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+      id: nanoid(),
+    };
+    console.log('add expense', expenseData);
+    onAddExpense(expenseData);
+  };
   return (
     <div className="new-expense">
-      <ExpenseForm />
+      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
     </div>
   );
 };
