@@ -9,9 +9,10 @@ const NewExpense = ({ onAddExpense }) => {
       ...enteredExpenseData,
       id: nanoid(),
     };
-    console.log('add expense', expenseData);
+    console.log('new expense', expenseData);
     onAddExpense(expenseData);
   };
+
   return (
     <div className="new-expense">
       <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
