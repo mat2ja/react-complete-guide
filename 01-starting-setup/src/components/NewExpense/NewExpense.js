@@ -9,7 +9,7 @@ const NewExpense = ({ onAddExpense }) => {
       ...enteredExpenseData,
       id: nanoid(),
     };
-    console.log('new expense', expenseData);
+    console.log(expenseData);
     onAddExpense(expenseData);
   };
 
