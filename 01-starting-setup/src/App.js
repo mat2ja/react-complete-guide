@@ -1,4 +1,4 @@
-import Expenses from './components/Expenses.js';
+import Expenses from './components/Expenses/Expenses.js';
 
 function App() {
   const expenses = [
@@ -23,7 +23,7 @@ function App() {
     },
     {
       id: 'e5',
-      title: 'Cryptoag Zeus',
+      title: 'Crypotag Zeus',
       amount: 2756,
       date: new Date(2021, 11, 26),
     },
