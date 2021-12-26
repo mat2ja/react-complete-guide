@@ -16,14 +16,14 @@ const DUMMY_EXPENSES = [
   {
     id: nanoid(),
     title: 'Sony Bravia TV',
-    amount: 1799.49,
+    amount: 999.49,
     date: new Date(2021, 2, 12),
   },
   {
     id: nanoid(),
     title: 'HAK Insurance',
     amount: 294.67,
-    date: new Date(2020, 2, 28),
+    date: new Date(2020, 3, 28),
   },
   {
     id: nanoid(),
@@ -34,8 +34,14 @@ const DUMMY_EXPENSES = [
   {
     id: nanoid(),
     title: 'Macbook Air M1',
-    amount: 1399,
+    amount: 1099,
     date: new Date(2021, 4, 5),
+  },
+  {
+    id: nanoid(),
+    title: 'Macbook Pro M1 Max',
+    amount: 1299,
+    date: new Date(2021, 10, 29),
   },
   {
     id: nanoid(),
@@ -51,9 +57,15 @@ const DUMMY_EXPENSES = [
   },
   {
     id: nanoid(),
-    title: 'Lamborghini Urus',
-    amount: 250000,
+    title: 'Yankee Candles',
+    amount: 135,
     date: new Date(2022, 6, 12),
+  },
+  {
+    id: nanoid(),
+    title: 'Gym',
+    amount: 200,
+    date: new Date(2022, 6, 13),
   },
 ];
 
