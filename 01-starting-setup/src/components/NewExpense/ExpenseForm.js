@@ -3,42 +3,42 @@ import React, { useState } from 'react';
 import './ExpenseForm.css';
 
 const ExpenseForm = () => {
-  // const [enteredTitle, setEnteredTitle] = useState('');
-  // const [enteredAmount, setEnteredAmount] = useState('');
-  // const [enteredDate, setEnteredDate] = useState('');
   const [userInput, setUserInput] = useState({
     enteredTitle: '',
     enteredAmount: '',
     enteredDate: '',
   });
 
-  const titleChangeHandler = ({ target }) => {
-    console.log(target.value);
-    // setEnteredTitle(target.value);
-    setUserInput({
-      ...userInput,
-      enteredTitle: target.value,
-    });
-  };
-  const priceChangeHandler = ({ target }) => {
-    console.log(target.value);
-    // setEnteredAmount(target.value);
-    setUserInput({
-      ...userInput,
-      enteredAmount: target.value,
-    });
-  };
-  const dateChangeHandler = ({ target }) => {
-    console.log(target.value);
-    // setEnteredDate(target.value);
-    setUserInput({
-      ...userInput,
-      enteredDate: target.value,
-    });
+  const handlers = {
+    titleChangeHandler({ target }) {
+      // react schedules updates so is a possiblity you could reference incorrect state snapshot, thus:
+      //! always use this function form if your state depends on your previous state
+      setUserInput((prevState) => ({
+        ...prevState,
+        enteredTitle: target.value,
+      }));
+    },
+    priceChangeHandler({ target }) {
+      setUserInput((prevState) => ({
+        ...prevState,
+        enteredAmount: target.value,
+      }));
+    },
+    dateChangeHandler({ target }) {
+      setUserInput((prevState) => ({
+        ...prevState,
+        enteredDate: target.value,
+      }));
+    },
   };
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log(userInput);
+      }}
+    >
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label htmlFor="title">Title</label>
@@ -46,7 +46,7 @@ const ExpenseForm = () => {
             value={userInput.enteredTitle}
             type="text"
             id="title"
-            onChange={titleChangeHandler}
+            onChange={handlers.titleChangeHandler}
           />
         </div>
         <div className="new-expense__control">
@@ -57,7 +57,7 @@ const ExpenseForm = () => {
             min="0.01"
             step="0.01"
             id="price"
-            onChange={priceChangeHandler}
+            onChange={handlers.priceChangeHandler}
           />
         </div>
         <div className="new-expense__control">
@@ -68,7 +68,7 @@ const ExpenseForm = () => {
             min="2019-01-01"
             max="2022-12-31"
             id="date"
-            onChange={dateChangeHandler}
+            onChange={handlers.dateChangeHandler}
           />
         </div>
       </div>
