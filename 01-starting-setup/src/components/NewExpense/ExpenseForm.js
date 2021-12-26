@@ -2,32 +2,17 @@ import React, { useState } from 'react';
 
 import './ExpenseForm.css';
 
-const ExpenseForm = ({ onSaveExpenseData }) => {
+const ExpenseForm = ({ onSaveExpenseData, onCancel }) => {
   const initialUserInput = { title: '', amount: '', date: '' };
+
   const [userInput, setUserInput] = useState(initialUserInput);
 
-  const handlers = {
-    titleChangeHandler({ target }) {
-      // react schedules updates so is a possiblity you could reference incorrect state snapshot, thus:
-      //? always use this function form if your state depends on your previous state
-      setUserInput((prevState) => ({
-        ...prevState,
-        title: target.value,
-      }));
-    },
-    priceChangeHandler({ target }) {
-      setUserInput((prevState) => ({
-        ...prevState,
-        amount: target.value,
-      }));
-    },
-    dateChangeHandler({ target }) {
-      setUserInput((prevState) => ({
-        ...prevState,
-        date: target.value,
-      }));
-    },
-  };
+  const titleChangeHandler = ({ target }) =>
+    setUserInput((prevState) => ({ ...prevState, title: target.value }));
+  const priceChangeHandler = ({ target }) =>
+    setUserInput((prevState) => ({ ...prevState, amount: target.value }));
+  const dateChangeHandler = ({ target }) =>
+    setUserInput((prevState) => ({ ...prevState, date: target.value }));
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -37,6 +22,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
       date: new Date(userInput.date),
     });
     setUserInput(initialUserInput);
+    onCancel();
   };
 
   return (
@@ -49,7 +35,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
             id="title"
             placeholder="Your title"
             value={userInput.title}
-            onChange={handlers.titleChangeHandler}
+            onChange={titleChangeHandler}
           />
         </div>
         <div className="new-expense__control">
@@ -61,7 +47,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
             id="price"
             placeholder="Your price"
             value={userInput.amount}
-            onChange={handlers.priceChangeHandler}
+            onChange={priceChangeHandler}
           />
         </div>
         <div className="new-expense__control">
@@ -72,11 +58,14 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
             max="2022-12-31"
             id="date"
             value={userInput.date}
-            onChange={handlers.dateChangeHandler}
+            onChange={dateChangeHandler}
           />
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={onCancel} className="secondary">
+          Cancel
+        </button>
         <button type="submit">Submit</button>
       </div>
     </form>

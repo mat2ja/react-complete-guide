@@ -1,9 +1,12 @@
 import { nanoid } from 'nanoid';
+import React, { useState } from 'react';
 
 import ExpenseForm from './ExpenseForm.js';
 import './NewExpense.css';
 
 const NewExpense = ({ onAddExpense }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
@@ -13,9 +16,20 @@ const NewExpense = ({ onAddExpense }) => {
     onAddExpense(expenseData);
   };
 
+  const startEditingHandler = () => setIsEditing(true);
+  const stopEditingHandler = () => setIsEditing(false);
+
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add new expense</button>
+      )}
     </div>
   );
 };
