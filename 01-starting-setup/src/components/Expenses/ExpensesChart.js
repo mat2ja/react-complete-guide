@@ -6,10 +6,9 @@ const ExpensesChart = ({ expenses }) => {
 
   const chartDataPoints = [...Array(12).keys()].map((i) => ({
     id: i,
-    value: 0,
     label: getMonthName(i),
+    value: 0,
   }));
-  console.log('chartDataPoints :>> ', chartDataPoints);
 
   expenses.forEach(({ date, amount }) => {
     const expenseMonth = date.getMonth();
