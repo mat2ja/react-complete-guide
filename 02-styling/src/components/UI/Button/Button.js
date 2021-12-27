@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import './Button.css';
 
 const Button = styled.button`
-  background: red;
   font: inherit;
   padding: 0.5rem 1.5rem;
   border: 1px solid #8b005d;
@@ -27,13 +26,5 @@ const Button = styled.button`
     opacity: 0.3;
   }
 `;
-
-// const Button = ({ type, onClick, children }) => {
-//   return (
-//     <button type={type} className="button" {...onClick}>
-//       {children}
-//     </button>
-//   );
-// };
 
 export default Button;
