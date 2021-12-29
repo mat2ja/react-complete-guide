@@ -2,15 +2,23 @@ import Button from '../UI/Button.js';
 import Card from '../UI/Card.js';
 import c from './AddUser.module.css';
 import React, { useState } from 'react';
+import ErrroModal from '../UI/ErrorModal.js';
 
 const AddUser = ({ onAddUser }) => {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
+  const [modalShown, setModalShown] = useState(false);
+  const [errorMsg, setErrorMsg] = useState({ title: '', message: '' });
 
   const addUserHandler = (e) => {
     e.preventDefault();
     const formValid = validateForm();
     if (!formValid) {
+      setModalShown(true);
+      setErrorMsg({
+        title: 'Invalid info',
+        message: 'Check the details and try again.',
+      });
       return console.log('Info not valid');
     }
     onAddUser({ username, age });
@@ -46,38 +54,51 @@ const AddUser = ({ onAddUser }) => {
     return formValid;
   };
 
+  const closeModalHandler = () => {
+    setModalShown(false);
+  };
+
   return (
-    <Card className={c['input-card']}>
-      <form onSubmit={addUserHandler}>
-        <div className={c['input-group']}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            autoComplete="off"
-            value={username}
-            onChange={usernameChangeHandler}
-          />
-        </div>
-        <div className={c['input-group']}>
-          <label htmlFor="age">Age</label>
-          <input
-            type="number"
-            name="age"
-            id="age"
-            min="1"
-            max="140"
-            autoComplete="off"
-            value={age}
-            onChange={passwordChangeHandler}
-          />
-        </div>
-        <Button onClick={addUserHandler} type="submit">
-          Add user
-        </Button>
-      </form>
-    </Card>
+    <>
+      {modalShown && (
+        <ErrroModal
+          title={errorMsg.title}
+          message={errorMsg.message}
+          onClose={closeModalHandler}
+        />
+      )}
+      <Card className={c['input-card']}>
+        <form onSubmit={addUserHandler}>
+          <div className={c['input-group']}>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              autoComplete="off"
+              value={username}
+              onChange={usernameChangeHandler}
+            />
+          </div>
+          <div className={c['input-group']}>
+            <label htmlFor="age">Age</label>
+            <input
+              type="number"
+              name="age"
+              id="age"
+              min="1"
+              max="140"
+              autoComplete="off"
+              value={age}
+              onChange={passwordChangeHandler}
+            />
+          </div>
+          <Button onClick={addUserHandler} type="submit">
+            🌟️ Add user 🌟️
+          </Button>
+        </form>
+      </Card>
+    </>
   );
 };
 
