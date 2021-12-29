@@ -26,11 +26,11 @@ const ErrroModal = ({ title, message, className, onConfirm }) => {
     <>
       {ReactDOM.createPortal(
         <Backdrop />,
-        document.querySelector('.backdrop-root')
+        document.getElementById('backdrop-root')
       )}
       {ReactDOM.createPortal(
         <ModalOverlay />,
-        document.querySelector('.overlay-root')
+        document.getElementById('overlay-root')
       )}
     </>
   );
