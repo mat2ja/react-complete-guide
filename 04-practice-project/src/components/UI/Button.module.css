@@ -1,0 +1,23 @@
+.button {
+  margin-top: 1rem;
+  background: #f48fb1;
+  color: #880e4f;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font: inherit;
+  font-size: 0.8em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.button:hover {
+  background: #f06292;
+}
+
+.button:focus {
+  outline: none;
+}
