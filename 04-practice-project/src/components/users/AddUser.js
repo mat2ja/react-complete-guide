@@ -12,17 +12,32 @@ const AddUser = ({ onAddUser }) => {
 
   const addUserHandler = (e) => {
     e.preventDefault();
-    const formValid = validateForm();
-    if (!formValid) {
-      setModalShown(true);
+
+    const validUsername = validators.validateUsername();
+    const validAge = validators.validateAge();
+
+    if (!validUsername && !validAge) {
       setErrorMsg({
         title: 'Invalid info',
-        message: 'Check the details and try again.',
+        message: 'Please check your details and try again',
       });
-    } else {
-      onAddUser({ username, age });
-      resetForm();
+      return setModalShown(true);
+    } else if (!validUsername) {
+      setErrorMsg({
+        title: 'Invalid username',
+        message: 'Please put your actual username bro',
+      });
+      return setModalShown(true);
+    } else if (!validAge) {
+      setErrorMsg({
+        title: 'Invalid age',
+        message: 'Age should be between 1 and 140',
+      });
+      return setModalShown(true);
     }
+
+    onAddUser({ username, age });
+    resetForm();
   };
 
   const usernameChangeHandler = ({ target }) =>
@@ -41,13 +56,6 @@ const AddUser = ({ onAddUser }) => {
     validateAge() {
       return age !== '' && age > 1 && age <= 140;
     },
-  };
-
-  const validateForm = () => {
-    const { validateUsername, validateAge } = validators;
-    const validations = [validateUsername(), validateAge()];
-    const formValid = validations.every(Boolean);
-    return formValid;
   };
 
   const closeModalHandler = () => {
