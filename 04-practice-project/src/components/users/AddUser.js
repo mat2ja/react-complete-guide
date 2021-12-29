@@ -1,7 +1,7 @@
 import Button from '../UI/Button.js';
 import Card from '../UI/Card.js';
 import c from './AddUser.module.css';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ErrroModal from '../UI/ErrorModal.js';
 
 const AddUser = ({ onAddUser }) => {
@@ -9,8 +9,13 @@ const AddUser = ({ onAddUser }) => {
   const [age, setAge] = useState('');
   const [error, setError] = useState();
 
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const addUserHandler = (e) => {
     e.preventDefault();
+    console.log('nameInputRef :>> ', nameInputRef.current.value);
+    console.log('ageInputRef :>> ', ageInputRef.current.value);
 
     const validUsername = validators.validateUsername();
     const validAge = validators.validateAge();
@@ -81,6 +86,7 @@ const AddUser = ({ onAddUser }) => {
               autoComplete="off"
               value={username}
               onChange={usernameChangeHandler}
+              ref={nameInputRef}
             />
           </div>
           <div className={c['input-group']}>
@@ -94,6 +100,7 @@ const AddUser = ({ onAddUser }) => {
               autoComplete="off"
               value={age}
               onChange={passwordChangeHandler}
+              ref={ageInputRef}
             />
           </div>
           <Button onClick={addUserHandler} type="submit">
