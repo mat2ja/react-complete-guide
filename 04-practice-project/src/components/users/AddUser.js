@@ -7,8 +7,7 @@ import ErrroModal from '../UI/ErrorModal.js';
 const AddUser = ({ onAddUser }) => {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
-  const [modalShown, setModalShown] = useState(false);
-  const [errorMsg, setErrorMsg] = useState({ title: '', message: '' });
+  const [error, setError] = useState();
 
   const addUserHandler = (e) => {
     e.preventDefault();
@@ -17,23 +16,23 @@ const AddUser = ({ onAddUser }) => {
     const validAge = validators.validateAge();
 
     if (!validUsername && !validAge) {
-      setErrorMsg({
+      setError({
         title: 'Invalid info',
         message: 'Please check your details and try again',
       });
-      return setModalShown(true);
+      return;
     } else if (!validUsername) {
-      setErrorMsg({
+      setError({
         title: 'Invalid username',
         message: 'Please put your actual username bro',
       });
-      return setModalShown(true);
+      return;
     } else if (!validAge) {
-      setErrorMsg({
+      setError({
         title: 'Invalid age',
-        message: 'Age should be between 1 and 140',
+        message: 'Why not put your ACTUAL age fam?',
       });
-      return setModalShown(true);
+      return;
     }
 
     onAddUser({ username, age });
@@ -59,16 +58,16 @@ const AddUser = ({ onAddUser }) => {
   };
 
   const closeModalHandler = () => {
-    setModalShown(false);
+    setError(null);
   };
 
   return (
     <>
-      {modalShown && (
+      {error && (
         <ErrroModal
-          title={errorMsg.title}
-          message={errorMsg.message}
-          onClose={closeModalHandler}
+          title={error.title}
+          message={error.message}
+          onConfirm={closeModalHandler}
         />
       )}
       <Card className={c['input-card']}>

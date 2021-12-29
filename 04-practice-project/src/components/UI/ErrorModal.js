@@ -2,7 +2,7 @@ import Button from './Button.js';
 import Card from './Card.js';
 import c from './ErrorModal.module.css';
 
-const ErrroModal = ({ title, message, className, onClose }) => {
+const ErrroModal = ({ title, message, className, onConfirm }) => {
   return (
     <div className={c.backdrop}>
       <Card className={`${c.modal} ${className}`}>
@@ -13,7 +13,7 @@ const ErrroModal = ({ title, message, className, onClose }) => {
           <p>{message}</p>
         </div>
         <footer className={c.actions}>
-          <Button onClick={onClose}>Okay 🙄️</Button>
+          <Button onClick={onConfirm}>Okay 🙄️</Button>
         </footer>
       </Card>
     </div>
