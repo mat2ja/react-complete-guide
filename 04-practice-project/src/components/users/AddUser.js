@@ -19,19 +19,15 @@ const AddUser = ({ onAddUser }) => {
         title: 'Invalid info',
         message: 'Check the details and try again.',
       });
-      return console.log('Info not valid');
+    } else {
+      onAddUser({ username, age });
+      resetForm();
     }
-    onAddUser({ username, age });
-    resetForm();
   };
 
-  const usernameChangeHandler = ({ target }) => {
+  const usernameChangeHandler = ({ target }) =>
     setUsername(target.value.trim());
-  };
-
-  const passwordChangeHandler = ({ target }) => {
-    setAge(Number(target.value));
-  };
+  const passwordChangeHandler = ({ target }) => setAge(Number(target.value));
 
   const resetForm = () => {
     setUsername('');
