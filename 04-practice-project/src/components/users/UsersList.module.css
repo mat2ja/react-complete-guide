@@ -1,0 +1,25 @@
+.users {
+  padding: 1rem;
+}
+
+.users ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+
+  font-weight: bold;
+  font-size: 24px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.users li {
+  background: #f8bbd0;
+  color: #880e4f;
+  border: 3px dashed #880e4f;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}

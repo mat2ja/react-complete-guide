@@ -3,7 +3,7 @@ import Card from '../UI/Card.js';
 import c from './AddUser.module.css';
 import React, { useState } from 'react';
 
-const AddUser = (props) => {
+const AddUser = ({ onAddUser }) => {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
 
@@ -13,8 +13,8 @@ const AddUser = (props) => {
     if (!formValid) {
       return console.log('Info not valid');
     }
+    onAddUser({ username, age });
     resetForm();
-    console.log(username, age);
   };
 
   const usernameChangeHandler = ({ target }) => {
