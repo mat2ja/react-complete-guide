@@ -56,16 +56,22 @@ const Login = ({ onLogin }) => {
     isValid: null,
   });
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
   useEffect(() => {
-    const tid = setTimeout(() => {
-      console.log('checking form validity');
-      setFormIsValid(emailState.isValid && passwordState.isValid);
-    }, 500);
+    console.log('useEffect');
+    // const tid = setTimeout(() => {
+    //   console.log('checking form validity');
+    //   setFormIsValid(emailIsValid && passwordIsValid);
+    // }, 500);
+
+    setFormIsValid(emailIsValid && passwordIsValid);
 
     return () => {
-      clearTimeout(tid);
+      // clearTimeout(tid);
     };
-  }, [emailState, passwordState]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = ({ target }) => {
     dispatchEmail({
