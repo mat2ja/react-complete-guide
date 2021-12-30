@@ -18,14 +18,10 @@ const Login = (props) => {
         enteredEmail.includes('@') && enteredPassword.trim().length > 6
       );
     }, 500);
-    // console.log('USEFFECT', tid);
 
-    // Cleanup function
-    //* - cleanup current useEffect before useEffect of next render (except on first render)
-    //    or cleanup previous useEffect before new useEffect run
-    //* - before component is removed / unmounted
+    // cleanup current useEffect before useEffect of next render (except on first render)
+    // before component is removed / unmounted
     return () => {
-      // console.log('CLEANUP', tid);
       console.log('cleanup');
       clearTimeout(tid);
     };
