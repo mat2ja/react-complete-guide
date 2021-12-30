@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -11,20 +11,32 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+  useEffect(() => {
+    const tid = setTimeout(() => {
+      console.log('checking form validity');
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 500);
+    // console.log('USEFFECT', tid);
 
-    setFormIsValid(
-      event.target.value.includes('@') && enteredPassword.trim().length > 6
-    );
+    // Cleanup function
+    //* - cleanup current useEffect before useEffect of next render (except on first render)
+    //    or cleanup previous useEffect before new useEffect run
+    //* - before component is removed / unmounted
+    return () => {
+      // console.log('CLEANUP', tid);
+      console.log('cleanup');
+      clearTimeout(tid);
+    };
+  }, [enteredEmail, enteredPassword]);
+
+  const emailChangeHandler = ({ target }) => {
+    setEnteredEmail(target.value);
   };
 
-  const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    );
+  const passwordChangeHandler = ({ target }) => {
+    setEnteredPassword(target.value);
   };
 
   const validateEmailHandler = () => {
@@ -55,6 +67,7 @@ const Login = (props) => {
             value={enteredEmail}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
+            autoComplete="off"
           />
         </div>
         <div
@@ -69,6 +82,7 @@ const Login = (props) => {
             value={enteredPassword}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
+            autoComplete="off"
           />
         </div>
         <div className={classes.actions}>
