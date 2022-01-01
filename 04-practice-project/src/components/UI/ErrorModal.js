@@ -1,7 +1,7 @@
+import ReactDOM from 'react-dom';
 import Button from './Button.js';
 import Card from './Card.js';
 import c from './ErrorModal.module.css';
-import ReactDOM from 'react-dom';
 
 const ErrroModal = ({ title, message, className, onConfirm }) => {
   const Backdrop = () => {
