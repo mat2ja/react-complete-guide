@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useReducer } from 'react';
-
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import AuthContext from '../../store/auth-contetxt.js';
+import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
-import Button from '../UI/Button/Button';
 
 const emailReducer = (state, action) => {
   const validateEmail = (value) => value.includes('@');
@@ -45,7 +45,7 @@ const passwordReducer = (state, action) => {
   }
 };
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [formIsValid, setFormIsValid] = useState(false);
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: '',
@@ -56,21 +56,13 @@ const Login = ({ onLogin }) => {
     isValid: null,
   });
 
+  const { onLogin } = useContext(AuthContext);
+
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
 
   useEffect(() => {
-    console.log('useEffect');
-    // const tid = setTimeout(() => {
-    //   console.log('checking form validity');
-    //   setFormIsValid(emailIsValid && passwordIsValid);
-    // }, 500);
-
     setFormIsValid(emailIsValid && passwordIsValid);
-
-    return () => {
-      // clearTimeout(tid);
-    };
   }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = ({ target }) => {
