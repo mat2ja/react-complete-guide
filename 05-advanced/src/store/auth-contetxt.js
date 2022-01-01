@@ -10,7 +10,6 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const loginHandler = (email, password) => {
-    console.log('login');
     localStorage.setItem('isLoggedIn', '1');
     setIsLoggedIn(true);
   };

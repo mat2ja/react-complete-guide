@@ -6,13 +6,11 @@ import AuthContext from './store/auth-contetxt.js';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <>
       <MainHeader />
-      <main>
-        {!isLoggedIn && <Login />}
-        {isLoggedIn && <Home />}
-      </main>
+      <main>{isLoggedIn ? <Home /> : <Login />}</main>
     </>
   );
 }

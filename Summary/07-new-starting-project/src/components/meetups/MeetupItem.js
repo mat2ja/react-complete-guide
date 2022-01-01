@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import FavoritesContext from '../../store/favorites-context.js';
 import Card from '../ui/Card.js';
 import classes from './MeetupItem.module.css';

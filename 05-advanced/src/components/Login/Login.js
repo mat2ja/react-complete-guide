@@ -63,6 +63,10 @@ const Login = () => {
 
   useEffect(() => {
     setFormIsValid(emailIsValid && passwordIsValid);
+
+    return () => {
+      console.log('cleanup');
+    };
   }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = ({ target }) => {
