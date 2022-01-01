@@ -6,7 +6,6 @@ const Navigation = ({ onLogout }) => {
   return (
     <AuthContext.Consumer>
       {(ctx) => {
-        console.log(ctx);
         return (
           <nav className={classes.nav}>
             <ul>
