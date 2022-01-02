@@ -11,7 +11,7 @@ const Input = React.forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => {
     return {
-      // define custom properties & methods on ref
+      // expose custom properties & methods on ref from parent component
       // my_name: my_method
       focus: activate,
     };
