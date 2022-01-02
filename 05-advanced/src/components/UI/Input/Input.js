@@ -11,9 +11,13 @@ const Input = React.forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => {
     return {
+      // define custom properties & methods on ref
+      // my_name: my_method
       focus: activate,
     };
   });
+
+  console.dir(inputRef.current);
 
   return (
     <div
