@@ -3,7 +3,7 @@ import Input from '../../UI/Input.js';
 
 import classes from './MealItemForm.module.css';
 
-const MealItemForm = ({ id, onAdd }) => {
+const MealItemForm = ({ id }) => {
   const input = {
     id: `meals_${id}`,
     type: 'number',
@@ -20,7 +20,7 @@ const MealItemForm = ({ id, onAdd }) => {
   return (
     <form className={classes.form} onSubmit={submitForm}>
       <Input input={input} />
-      <button onClick={onAdd}>Add +</button>
+      <button>Add +</button>
     </form>
   );
 };
