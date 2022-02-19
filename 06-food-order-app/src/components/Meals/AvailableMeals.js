@@ -30,9 +30,9 @@ const DUMMY_MEALS = [
   },
 ];
 
-const AvailableMeals = (props) => {
+const AvailableMeals = ({ onAdd }) => {
   const mealsList = DUMMY_MEALS.map((meal) => (
-    <MealItem key={meal.id} meal={meal} />
+    <MealItem key={meal.id} meal={meal} onAdd={onAdd} />
   ));
 
   return (
