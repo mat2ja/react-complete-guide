@@ -1,13 +1,5 @@
-import classes from './Button.module.css'
-
 const Button = (props) => {
-  
-  
-  return (
-    <>
-      
-    </>
-  )
-}
+  return <></>;
+};
 
-export default Button
+export default Button;
