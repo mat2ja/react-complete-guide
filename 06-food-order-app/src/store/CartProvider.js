@@ -35,23 +35,16 @@ const cartReducer = (state, action) => {
       };
     }
     case 'REMOVE_ITEM': {
-      const existingItemIdx = state.items.findIndex(
-        (item) => item.id === action.id
-      );
-      const existingItem = state.items[existingItemIdx];
+      const existingItem = state.items.find((item) => item.id === action.id);
+      const isSingleItem = existingItem.amount === 1;
 
-      let updatedItems;
-      if (existingItem.amount === 1) {
-        updatedItems = state.items.filter((item) => item.id !== action.id);
-      } else {
-        const updatedItem = {
-          ...existingItem,
-          amount: existingItem.amount - 1,
-        };
-
-        updatedItems = [...state.items];
-        updatedItems[existingItemIdx] = updatedItem;
-      }
+      const updatedItems = isSingleItem
+        ? state.items.filter((item) => item.id !== action.id)
+        : state.items.map((item) =>
+            item.id === action.id
+              ? { ...item, amount: existingItem.amount - 1 }
+              : item
+          );
 
       return {
         ...state,
@@ -72,8 +65,6 @@ const CartProvider = ({ children }) => {
   const removeItemFromCartHandler = (id) => {
     dispatch({ type: 'REMOVE_ITEM', id });
   };
-
-  console.log('running context');
 
   const totalAmount = useMemo(
     () =>
