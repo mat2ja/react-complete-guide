@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useMemo } from 'react';
 
 import CartContext from './cart-context.js';
 
@@ -10,9 +10,6 @@ const defaultCartState = {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ITEM': {
-      const updatedTotalAmount =
-        state.totalAmount + action.item.price * action.item.amount;
-
       const existingCartItemIdx = state.items.findIndex(
         (item) => item.id === action.item.id
       );
@@ -33,8 +30,8 @@ const cartReducer = (state, action) => {
       }
 
       return {
+        ...state,
         items: updatedItems,
-        totalAmount: updatedTotalAmount,
       };
     }
     case 'REMOVE_ITEM': {
@@ -42,8 +39,6 @@ const cartReducer = (state, action) => {
         (item) => item.id === action.id
       );
       const existingItem = state.items[existingItemIdx];
-
-      const updatedTotalAmount = state.totalAmount - existingItem.price;
 
       let updatedItems;
       if (existingItem.amount === 1) {
@@ -59,8 +54,8 @@ const cartReducer = (state, action) => {
       }
 
       return {
+        ...state,
         items: updatedItems,
-        totalAmount: updatedTotalAmount,
       };
     }
     default:
@@ -78,11 +73,29 @@ const CartProvider = ({ children }) => {
     dispatch({ type: 'REMOVE_ITEM', id });
   };
 
+  console.log('running context');
+
+  const totalAmount = useMemo(
+    () =>
+      cartState.items.reduce(
+        (total, item) => total + item.price * item.amount,
+        0
+      ),
+    [cartState.items]
+  );
+
+  const itemCount = useMemo(
+    () => cartState.items.reduce((count, item) => count + item.amount, 0),
+    [cartState.items]
+  );
+
+  const hasItems = cartState.items.length > 0;
+
   const cartContext = {
     items: cartState.items,
-    totalAmount: cartState.totalAmount,
-    hasItems: cartState.items.length > 0,
-    itemCount: cartState.items.reduce((count, item) => count + item.amount, 0),
+    totalAmount,
+    itemCount,
+    hasItems,
     addItem: addItemHandler,
     removeItem: removeItemFromCartHandler,
   };
