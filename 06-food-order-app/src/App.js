@@ -4,7 +4,7 @@ import Header from './components/Layout/Header.js';
 import Meals from './components/Meals/Meals.js';
 
 function App() {
-  const [cartIsShown, setCartIsShown] = useState(true);
+  const [cartIsShown, setCartIsShown] = useState(false);
 
   const showCartHandler = () => setCartIsShown(true);
   const hideCartHandler = () => setCartIsShown(false);
