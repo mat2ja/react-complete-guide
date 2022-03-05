@@ -2,4 +2,6 @@
 	(incl Hooks, React Router, Redux)
 [50-hour Udemy Course by Maximilian Schwarzmüller](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
 
+- [Expenses app](https://gifted-test.surge.sh/)
+- [Practice app](https://lonely-trail.surge.sh/)
 - [Food order app](https://white-feet.surge.sh/)
