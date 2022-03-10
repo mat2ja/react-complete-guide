@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import DemoOutput from './components/Demo/DemoOutput.js';
 import Button from './components/UI/Button/Button.js';
 
-function App() {
+const App = () => {
   const [showP, setShowP] = useState(false);
 
-  const toggleParaHandler = () => setShowP((prev) => !prev);
+  const toggleParaHandler = useCallback(() => setShowP((prev) => !prev), []);
 
   console.log('app running 🏃');
 
@@ -17,6 +17,6 @@ function App() {
       <DemoOutput show={showP} />
     </div>
   );
-}
+};
 
 export default App;
