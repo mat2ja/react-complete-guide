@@ -6,17 +6,27 @@ import MoviesList from './components/MoviesList';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const hasMovies = movies?.length > 0;
 
   const fetchMoviesHandler = async () => {
     const url = 'https://swapi.dev/api/films/';
-    const movies = await fetch(url).then((res) => res.json());
-    const transformedMovies = movies.results.map((movie) => ({
-      id: movie.episode_id,
-      title: movie.title,
-      releaseDate: movie.release_date,
-      openingText: movie.opening_crawl,
-    }));
-    setMovies(transformedMovies);
+    setIsLoading(true);
+    try {
+      const movies = await fetch(url).then((res) => res.json());
+      const transformedMovies = movies.results.map((movie) => ({
+        id: movie.episode_id,
+        title: movie.title,
+        releaseDate: movie.release_date,
+        openingText: movie.opening_crawl,
+      }));
+      setMovies(transformedMovies);
+    } catch (err) {
+      console.log('Error loading movies', err?.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -29,7 +39,9 @@ function App() {
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={movies} />
+        {!isLoading && hasMovies && <MoviesList movies={movies} />}
+        {!isLoading && !hasMovies && <p>No movies found</p>}
+        {isLoading && <p>Loading...</p>}
       </section>
     </>
   );
