@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MyP = ({ children }) => {
-  console.log('my paragraph! ⏳');
+  console.log('⏳ my paragraph running');
 
   return <p>{children}</p>;
 };

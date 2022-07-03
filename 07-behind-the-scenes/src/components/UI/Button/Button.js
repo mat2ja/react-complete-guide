@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Button.module.css';
 
 const Button = ({ type, className, onClick, disabled, children }) => {
-  console.log('button run 🅱️');
+  console.log('🅱️ button running');
   return (
     <button
       type={type || 'button'}
