@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import './App.css';
 import MoviesList from './components/MoviesList';
@@ -11,8 +11,9 @@ function App() {
 
   const hasMovies = movies?.length > 0;
 
-  const fetchMoviesHandler = async () => {
+  const fetchMoviesHandler = useCallback(async () => {
     const url = 'https://swapi.dev/api/films/';
+
     setIsLoading(true);
     setError(null);
     try {
@@ -37,22 +38,19 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchMoviesHandler();
-  }, []);
+  }, [fetchMoviesHandler]);
 
   let content = <p>No movies found 🤷‍♂️</p>;
-
   if (hasMovies) {
     content = <MoviesList movies={movies} />;
   }
-
   if (error) {
     content = <p style={{ color: '#f44336' }}>{error} 👿</p>;
   }
-
   if (isLoading) {
     content = <p>Loading...</p>;
   }
